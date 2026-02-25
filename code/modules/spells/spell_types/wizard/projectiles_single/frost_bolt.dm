@@ -53,8 +53,13 @@
 	range = 10
 	speed = 1
 	nodamage = FALSE
-	var/freeze_duration = 5 SECONDS
-	var/aoe_range = 0
+
+// Caustic Edit
+/obj/projectile/magic/frostbolt/arc
+	name = "Arced Frostbolt"
+	damage = 15 // 25% damage penalty
+	arcshot = TRUE
+// Caustic Edit End
 
 // Caustic Edit
 /obj/projectile/magic/frostbolt/arc
@@ -74,14 +79,6 @@
 			return BULLET_ACT_BLOCK
 		if(isliving(target))
 			var/mob/living/L = target
-			var/datum/status_effect/debuff/arcanemark/mark = L.has_status_effect(/datum/status_effect/debuff/arcanemark)
-
-			if(mark && mark.stacks == mark.max_stacks)
-				L.Immobilize(freeze_duration)
-				L.OffBalance(freeze_duration)
-				L.visible_message("<span class='warning'>[L]'s movements are halted by arcyne frost!</span>")
-				consume_arcane_mark_stacks(M)
-
 			if(L.has_status_effect(/datum/status_effect/buff/frostbite))
 				return
 			else
