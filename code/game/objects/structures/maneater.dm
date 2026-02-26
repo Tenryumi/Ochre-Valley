@@ -88,15 +88,17 @@
 	visible_message(span_userdanger("[src] begins to gnaw on [victim]! RESIST as many times as you can or become a chew toy!"))
 	addtimer(CALLBACK(src, PROC_REF(begin_eat), victim), 3 SECONDS, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_STOPPABLE)
 
-/obj/structure/flora/roguegrass/maneater/real/proc/begin_eat(mob/living/victim, var/chew_factor = 1)
+/obj/structure/flora/roguegrass/maneater/real/proc/begin_eat(mob/living/victim, chew_factor = 1)
+	if(!victim || QDELETED(victim))
+		return
 	if(victim.loc != loc)
 		return
 	if(!(has_buckled_mobs() && victim.buckled))
 		return
 
 	visible_message(span_userdanger("[src] gnaws on [victim]!"))
+	playsound(src, 'sound/misc/eat.ogg', rand(30,60), TRUE)
 
-	playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 	if(!iscarbon(victim))
 		victim.adjustBruteLoss(20)
 	else
@@ -115,10 +117,11 @@
 				if(!victim.mind)
 					victim.gib()
 					seednutrition += 25
-					return
-				maneater_spit_out(victim)
+			else
+				victim.apply_damage(60, BRUTE, zone, victim.run_armor_check(zone, BCLASS_CUT, damage = 500))
 		else
-			victim.apply_damage(60, BRUTE, zone, victim.run_armor_check(zone, BCLASS_CUT, damage = 500))
+			var/core_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_HEAD)
+			victim.apply_damage(60, BRUTE, core_zone, victim.run_armor_check(core_zone, BCLASS_CUT, damage = 500))
 
 	if(victim.stat == DEAD || victim.stat == UNCONSCIOUS)
 		if(!victim.mind)
