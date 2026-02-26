@@ -4,15 +4,16 @@
 /datum/species/demihuman
 	name = "Half-Kin"
 	id = "demihuman"
+	is_subrace = TRUE
+	origin_default = /datum/virtue/origin/grenzelhoft
+	origin = "Grenzelhoft"
+	base_name = "Humen"
 	desc = "The inevitable union between wildkin and some form of humanity or another. While they also experience animalistic tendencies akin to their full-blooded ancestors, their intermingling with others has stemmed the severity of such primordial impulses. (Half-kin are not a template race to play your own custom race. If you play a half-kin, you are expected to roleplay to the setting and the race's lore.)<br>\
-	(+1 Willpower, +1 Perception)"
+	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>+1 PER | +1 WIL </b></span><br>"
 	skin_tone_wording = "Ancestry"
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,STUBBLE,OLDGREY,MUTCOLORS_PARTSONLY)
 	allowed_taur_types = list(
-		/obj/item/bodypart/taur/lamia,
-		/obj/item/bodypart/taur/spider,
-		/obj/item/bodypart/taur/horse,
 		///Caustic edit
 		/obj/item/bodypart/taur/cow,
 		/obj/item/bodypart/taur/lizard,
@@ -37,6 +38,10 @@
 		/obj/item/bodypart/taur/bunny,
 		/obj/item/bodypart/taur/mammoth,
 		///Caustic edit end
+		/obj/item/bodypart/taur/lamia,
+		/obj/item/bodypart/taur/spider,
+		/obj/item/bodypart/taur/horse,
+		/obj/item/bodypart/taur/goat,
 	)
 	default_features = MANDATORY_FEATURE_LIST
 	use_skintones = TRUE
@@ -61,7 +66,6 @@
 		OFFSET_FACE_F = list(0,-1), OFFSET_BELT_F = list(0,0), OFFSET_BACK_F = list(0,-1), \
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
-		OFFSET_TAUR = list(-16,0), OFFSET_TAUR_F = list(-16,0), \
 		)
 	race_bonus = list(STAT_PERCEPTION = 1, STAT_WILLPOWER = 1)
 	enflamed_icon = "widefire"
@@ -92,10 +96,9 @@
 		/datum/customizer/organ/ears/demihuman,
 		/datum/customizer/organ/horns/demihuman,
 		/datum/customizer/organ/tail/demihuman,
-		/datum/customizer/organ/tail_feature/anthro,
 		/datum/customizer/organ/wings/anthro,
-		/datum/customizer/organ/neck_feature/anthro, //Caustic Edit - Add Fluff feature option to Half-Kin
 		/datum/customizer/organ/testicles/anthro,
+		/datum/customizer/organ/neck_feature/anthro, //Caustic Edit - Add Fluff feature option to Half-Kin
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,
 		/datum/customizer/organ/vagina/animal,
@@ -137,7 +140,7 @@
 		/datum/descriptor_choice/prominent_three_wild,
 		/datum/descriptor_choice/prominent_four_wild,
 	)
-
+	
 /datum/species/demihuman/check_roundstart_eligible()
 	return TRUE
 

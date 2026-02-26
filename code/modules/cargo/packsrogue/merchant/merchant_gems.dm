@@ -6,7 +6,7 @@
 
 /datum/supply_pack/rogue/gems/amethyst
 	name = "Amythortz"
-	cost = 15
+	cost = 25
 	contains = list(/obj/item/roguegem/amethyst)
 
 /datum/supply_pack/rogue/gems/toper
@@ -44,9 +44,45 @@
 	cost = 500
 	contains = list(/obj/item/riddleofsteel)
 
+//Gemcarving gems. Currently following the 1.6x sell price of the gem format.  This currently makes most gems generally a loss, or at least only minorly profitable, to buy, carve, resell
+
+/datum/supply_pack/rogue/gems/jade
+	name = "jade"
+	cost = 80
+	contains = list(/obj/item/roguegem/jade)
+
+/datum/supply_pack/rogue/gems/onyxa
+	name = "Onyxa"
+	cost = 48
+	contains = list(/obj/item/roguegem/onyxa)
+
+/datum/supply_pack/rogue/gems/coral
+	name = "Heartstone"
+	cost = 96
+	contains = list(/obj/item/roguegem/coral)
+
+/datum/supply_pack/rogue/gems/turq
+	name = "Cerulite"
+	cost = 120
+	contains = list(/obj/item/roguegem/turq)
+
+/datum/supply_pack/rogue/gems/amber
+	name = "Amber"
+	cost = 80
+	contains = list(/obj/item/roguegem/amber)
+
+/datum/supply_pack/rogue/gems/opal
+	name = "Opal"
+	cost = 128
+	contains = list(/obj/item/roguegem/opal)
+
+/datum/supply_pack/rogue/gems/rose
+	name = "Rosestone"
+	cost = 24
+	contains = list(/obj/item/carvedgem/rose/rawrose)
+
 // Caustic edit
 /datum/supply_pack/rogue/gems/reform
 	name = "Gem of Reformation"
 	cost = 70
 	contains = list(/obj/item/reformation_gem)
-

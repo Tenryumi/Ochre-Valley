@@ -20,7 +20,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	display_order = JDO_ADVENTURER
 	selection_color = JCOLOR_WANDERER
 	show_in_credits = FALSE
-	min_pq = null //0
+	min_pq = 0
 	max_pq = null
 
 	advclass_cat_rolls = list(CTAG_ADVENTURER = 20)
@@ -49,6 +49,10 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		/datum/advclass/rogue/thief,
 		/datum/advclass/rogue/bard,
 		/datum/advclass/rogue/swashbuckler,
+		/datum/advclass/mystic,
+		/datum/advclass/mystic/resilientsoul,
+		/datum/advclass/mystic/holyblade,
+		/datum/advclass/mystic/theurgist,
 		/datum/advclass/mage,
 		/datum/advclass/mage/spellblade,
 		/datum/advclass/mage/spellsinger,
@@ -64,10 +68,13 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		/datum/advclass/foreigner/repentant,
 		/datum/advclass/foreigner/refugee,
 		/datum/advclass/foreigner/slaver,
+		/datum/advclass/foreigner/shepherd,
+		/datum/advclass/foreigner/fencerguy,
 		///Caustic edit
 		/datum/advclass/mage/spellthief,
 		/datum/advclass/rogue/buccaneer,
 		///Caustic edit end
+		/datum/advclass/foreigner/bronzeclad
 	)
 
 /mob/living/carbon/human/proc/adv_hugboxing_start()

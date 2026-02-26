@@ -44,6 +44,7 @@
 		L.adjust_bodytemperature(-rand(5, 15))
 	//Caustic Edit End
 
+
 /datum/particle_weather/snow_storm
 	name = "Rain"
 	desc = "Gentle Rain, la la description."
@@ -70,13 +71,3 @@
 	else
 		L.adjust_bodytemperature(-rand(5, 15))
 	//Caustic Edit End
-
-/turf
-	var/turf_flags = TURF_EFFECT_AFFECTABLE
-
-/turf/Exited(atom/movable/gone, direction)
-	if(!istype(gone))
-		return
-	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, direction)
-	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)
-

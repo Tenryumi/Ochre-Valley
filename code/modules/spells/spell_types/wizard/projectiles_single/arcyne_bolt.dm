@@ -13,7 +13,6 @@
 	chargedrain = 1
 	chargetime = 0
 	recharge_time = 4 SECONDS
-	human_req = TRUE
 	animagus_incompatible = TRUE // CC Edit
 	warnie = "spellwarning"
 	no_early_release = TRUE
@@ -40,6 +39,7 @@
 /obj/projectile/energy/arcynebolt
 	name = "Arcyne Bolt"
 	icon_state = "arcane_barrage"
+	guard_deflectable = TRUE
 	damage = 40
 	woundclass = BCLASS_BLUNT
 	nodamage = FALSE
