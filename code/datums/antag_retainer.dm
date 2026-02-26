@@ -57,7 +57,7 @@
 		return
 	SSticker.next_lord_check = world.time + 1 MINUTES
 	var/mob/living/ruler = SSticker.rulermob
-	if(!ruler || ruler.stat == DEAD)
+	if(ruler?.stat == DEAD) // OV Edit: Only check for a dead ruler if we actually have one! No bad omens just due to not having a regent!
 		if(!SSticker.missing_lord_time)
 			SSticker.missing_lord_time = world.time
 		if(world.time > SSticker.missing_lord_time + 10 MINUTES)
