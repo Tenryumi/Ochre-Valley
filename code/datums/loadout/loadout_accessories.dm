@@ -96,6 +96,12 @@
 	path = /obj/item/clothing/neck/roguetown/collar/bell_collar
 	sort_category = "Accessories"
 
+//OV edit
+/datum/loadout_item/cow_collar
+	name = "Cowbell Collar"
+	path = /obj/item/clothing/neck/roguetown/collar/cow_collar
+//OV edit end
+
 /datum/loadout_item/cursed_collar
 	name = "Cursed Collar"
 	path = /obj/item/clothing/neck/roguetown/gorget/cursed_collar
