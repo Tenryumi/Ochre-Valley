@@ -83,16 +83,6 @@ GLOBAL_LIST_EMPTY(locked_sex_objects)
 #define MOAN_COOLDOWN 3 SECONDS
 #define PAIN_COOLDOWN 6 SECONDS
 
-#define MIN_PENIS_SIZE 1
-#define DEFAULT_PENIS_SIZE 2
-// Caustic Edit Begin
-#define LARGE_PENIS_SIZE 3
-#define MASSIVE_PENIS_SIZE 4
-#define ENORMOUS_PENIS_SIZE 5
-#define MAX_PENIS_SIZE ENORMOUS_PENIS_SIZE 
-// Caustic Edit End
-
-
 //Caustic Edit - Side note, size ranges are called from _globalvars/customization/organ_customization.dm. The list before is sorta defunct now. because Azure reasons AND trying to keep my tampering of the code to a minimum for future Azure compatability. -Dinn
 // Caustic Edit - Adds Massive/Enormous sizes (Maximum on Azure was Large, now is Enormous)
 #define PENIS_SIZES list(\
