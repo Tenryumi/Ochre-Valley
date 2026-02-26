@@ -49,16 +49,16 @@
 		else
 			to_chat(src, "Screen shake disabled.")
 
-/client/verb/masked_examine()
+/client/verb/masked_examine() //Caustic Edit - Just... fixing this up everywhere it's used to be consistent. And not stupidly inversed? If this is true, it's ALLOWING the info.
 	set category = "Options"
 	set name = "Toggle Masked Examine"
 	if(prefs)
 		prefs.masked_examine = !prefs.masked_examine
 		prefs.save_preferences()
-		if(!prefs.masked_examine)
+		if(prefs.masked_examine)
 			to_chat(src, "Your character information will be viewable when masked.")
 		else
-			to_chat(src, "Your character information will no longer be viewable when masked.")
+			to_chat(src, "Your character information will no longer be viewable when masked.") //Caustic Edit End
 
 /client/verb/mute_animal_emotes()
 	set category = "Options"

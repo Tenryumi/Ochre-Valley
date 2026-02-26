@@ -215,7 +215,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			// NEXT ROW
 			dat += "<tr>"
 			dat += "<td style='width:16%;text-align:left;vertical-align: text-top'>"
-			if(intellectual && (!obscured_name || !H.client?.prefs.masked_examine))
+			if(intellectual && (!obscured_name || H.client?.prefs.masked_examine))
 				dat += "<b>STATS:</b><br><br>"
 				if(!is_guarded)
 					dat +=("STR: \Roman [H.STASTR]<br>")
@@ -366,7 +366,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			dat += "</td>"
 
 			dat += "<td style='width:40%;text-align:center;vertical-align: text-top'>"
-			if(!is_guarded && !is_stupid && (!obscured_name || !H.client?.prefs.masked_examine))	//We don't see Guarded people's skills at all.
+			if(!is_guarded && !is_stupid && (!obscured_name || H.client?.prefs.masked_examine))	//We don't see Guarded people's skills at all.
 				dat += "<b>SKILLS:</b><br><br>"
 				var/list/wornstuff = list(H.backr, H.backl, H.beltl, H.beltr)
 				if(!is_normal && !is_smart)	//At minimum we get to see the skills of the weapons the person is holding, if we have them.

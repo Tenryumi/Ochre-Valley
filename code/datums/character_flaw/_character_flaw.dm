@@ -32,6 +32,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	//Caustic edit
 	"Bottomless"=/datum/charflaw/bottomless,
 	"Asundered Mind"=/datum/charflaw/mind_broken,
+	"Combat Adverse"=/datum/charflaw/combat_adverse,
 	//Caustic edit end
 	"Hunted"=/datum/charflaw/hunted,
 	/datum/charflaw/mind_broken::name = /datum/charflaw/mind_broken,
