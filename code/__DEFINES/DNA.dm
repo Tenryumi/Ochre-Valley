@@ -183,10 +183,13 @@
 #define ERECT_STATE_HARD 3
 
 #define MIN_TESTICLES_SIZE 1
-#define MAX_TESTICLES_SIZE 5
+#define LARGE_TESTICLES_SIZE 3
+#define MASSIVE_TESTICLES_SIZE 4
+#define ENORMOUS_TESTICLES_SIZE 5
+#define MAX_TESTICLES_SIZE ENORMOUS_TESTICLES_SIZE // OV Edit - Use global vars for better clarity
 #define DEFAULT_TESTICLES_SIZE 2
 
-#define MIN_BREASTS_SIZE 0
-#define MAX_BREASTS_SIZE 16
-#define DEFAULT_BREASTS_SIZE 3
+#define MIN_BREASTS_SIZE BREAST_SIZE_FLAT // OV Edit - Use global vars for better clarity
+#define MAX_BREASTS_SIZE BREAST_SIZE_BAOTHAN // OV Edit - Use global vars for better clarity
+#define DEFAULT_BREASTS_SIZE BREAST_SIZE_NORMAL // OV Edit - Use global vars for better clarity
 //Caustic End
