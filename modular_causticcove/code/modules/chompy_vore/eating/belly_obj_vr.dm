@@ -274,6 +274,7 @@
 	var/entrance_logs = TRUE				// Belly-specific entry message toggle.
 	var/noise_freq = 42500					// Tasty sound prefs.
 	var/item_digest_logs = FALSE			// Chat messages for digested items.
+	var/hidden_by_armor = FALSE				// OV ADD - Hides belly if covered by clothing
 	var/storing_nutrition = FALSE			// Storing gained nutrition as paste instead of absorbing it.
 	var/belchchance = 0						// % Chance of pred belching on prey struggle
 
@@ -464,6 +465,7 @@
 	"absorbedrename_enabled",
 	"absorbedrename_name",
 	"item_digest_logs",
+	"hidden_by_armor",//OV ADD
 	"show_fullness_messages",
 	"digest_max",
 	"egg_type",
@@ -1102,6 +1104,7 @@
 	var/mob/dead/observer/G = M.ghostize(TRUE) // Make sure they're out, so we can copy attack logs and such.
 	if(G)
 		G.forceMove(owner)
+		G.vore_death = TRUE //OV ADD
 		if(G.client && G.client.prefs.digestion_noises)
 			SEND_SOUND(G, sfx)
 	M.clear_fullscreen("belly")
@@ -1743,6 +1746,7 @@
 	dupe.entrance_logs = entrance_logs
 	dupe.noise_freq = noise_freq
 	dupe.item_digest_logs = item_digest_logs
+	dupe.hidden_by_armor = hidden_by_armor //OV ADD
 	dupe.show_fullness_messages = show_fullness_messages
 	dupe.belchchance = belchchance
 	dupe.digest_max = digest_max

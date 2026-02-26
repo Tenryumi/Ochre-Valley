@@ -1317,6 +1317,9 @@
 	message = null
 	emote_type = EMOTE_VISIBLE
 
+	if(isliving(user))	//OV ADD
+		playsound(get_turf(user),'modular_ochrevalley/sounds/message_effects/emote.ogg',50,FALSE,0,frequency = rand(25000, 50000))	//OV ADD
+
 /datum/emote/living/custom/replace_pronoun(mob/user, message)
 	return message
 
