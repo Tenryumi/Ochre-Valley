@@ -105,8 +105,11 @@
 //Caustic Edit - Adding an on_moved call for flaws!
 /mob/living/carbon/human/Moved(atom/OldLoc, Dir)
 	. = ..()
-	if(charflaw && !charflaw.ephemeral && mind)
-		charflaw.flaw_on_moved(src, OldLoc, Dir)
+	// OV Edit - Account for multiple flaws
+	for(var/datum/charflaw/flaw in charflaws)
+		if(!flaw.ephemeral && mind)
+			flaw.flaw_on_moved(src, OldLoc, Dir)
+	// OV Edit End
 //Caustic Edit End
 
 /mob/living/carbon/human/DeadLife()

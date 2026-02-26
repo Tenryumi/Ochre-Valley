@@ -70,6 +70,11 @@ GLOBAL_LIST_INIT(averse_factions, list(
 /datum/charflaw/proc/flaw_on_life(mob/user)
 	return
 
+//Caustic Edit - Adding an on_moved call for flaws!
+/datum/charflaw/proc/flaw_on_moved(mob/user, atom/OldLoc, movement_dir)
+	return
+//Caustic Edit End
+
 /mob/proc/has_flaw(flaw)
 	return
 
@@ -543,6 +548,11 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	var/pain_pity_charges = 3
 	var/drugged_up = FALSE
 
+	//Caustic Edit
+	var/immobile_charges = 2
+	var/immobile_reset_count = 2
+	//Caustic Edit End
+
 /datum/charflaw/narcoleptic/on_mob_creation(mob/user)
 	ADD_TRAIT(user, TRAIT_FASTSLEEP, "[type]")
 	reset_timer()
@@ -557,6 +567,10 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(user.stat != CONSCIOUS)
 		reset_timer()
 		return
+	//Caustic Edit
+	if(immobile_charges < 1)
+		return
+	//Caustic Edit End
 	if(do_sleep)
 		if(next_sleep <= world.time)
 			var/pain = user.get_complex_pain()
@@ -574,6 +588,9 @@ GLOBAL_LIST_INIT(averse_factions, list(
 					to_chat(user, span_boldwarning("I can't keep my eyes open any longer..."))
 					user.Sleeping(rand(30 SECONDS, 50 SECONDS))
 					user.visible_message(span_warning("[user] suddenly collapses!"))
+				//Caustic Edit - If you stand still, you only have to deal with two iterations of this loop before it'll just cancel early
+				immobile_charges--
+				//Caustic Edit End
 			do_sleep = FALSE
 			last_unconsciousness = world.time
 	else
@@ -586,6 +603,12 @@ GLOBAL_LIST_INIT(averse_factions, list(
 				to_chat(user, span_blue("The drugs keeps me awake, for now..."))
 			else
 				to_chat(user, span_blue("I'm getting drowsy..."))
+
+//Caustic Edit
+/datum/charflaw/narcoleptic/flaw_on_moved(mob/user, atom/OldLoc, movement_dir)
+	if(immobile_charges < immobile_reset_count)
+		immobile_charges = immobile_reset_count
+//Caustic Edit End
 
 /proc/narcolepsy_drug_up(mob/living/living)
 	var/datum/charflaw/narcoleptic/narco = living.get_flaw()

@@ -139,8 +139,11 @@
 	eyes = new /obj/item/organ/eyes/night_vision/nightmare
 	eyes.Insert(src)
 	src.underwear = "Nude"
-	if(src.charflaw)
-		QDEL_NULL(src.charflaw)
+	// OV Edit Start - Remove flaws using new Azure flaw implementation
+	for(var/datum/charflaw/flaw in src.charflaws)
+		src.charflaws.Remove(flaw)
+		QDEL_NULL(flaw)
+	// OV Edit End
 	update_body()
 	faction = list("orcs")
 	name = "hoblin"
