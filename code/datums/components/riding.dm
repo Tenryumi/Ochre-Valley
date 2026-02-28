@@ -3,6 +3,7 @@
 	var/last_move_diagonal = FALSE
 	var/vehicle_move_delay = 4 //tick delay between movements, lower = faster, higher = slower
 	var/keytype
+	var/riding_xp_move_counter = 0 //Plays with the new EXP-obtaining mechanic, courtesy of PR #768 from Ophaq.
 
 	var/slowed = FALSE
 	var/slowvalue = 1
@@ -62,8 +63,19 @@
 	var/atom/movable/AM = parent
 	AM.set_glide_size(DELAY_TO_GLIDE_SIZE(vehicle_move_delay))
 	for(var/mob/M in AM.buckled_mobs)
+		if(!istype(M, /mob/living))
+			continue
+		var/mob/living/rider = M
 		ride_check(M)
 		M.set_glide_size(AM.glide_size)
+		if(rider.m_intent == MOVE_INTENT_RUN)
+			riding_xp_move_counter++
+			if(riding_xp_move_counter >= 5) 			 	// Determines how many steps are needed before Riding-type EXP is rewarded. In this case, you obtain EXP every time you travel five tiles while riding a mount.
+				var/xp_amt = rider.STAINT * 0.1 		 	// Scales the amount of Riding-type EXP that's rewarded, based on your character's INT. Same as every other skill.
+				rider.mind && rider.mind.add_sleep_experience(/datum/skill/misc/riding, xp_amt)
+				riding_xp_move_counter = 0
+		else
+			riding_xp_move_counter = 0					 	// Resets the counter if you're not running while riding.
 	handle_vehicle_offsets()
 	handle_vehicle_layer()
 
@@ -110,7 +122,7 @@
 								buckled_mob.layer = diroffsets[3]
 							buckled_mob.set_mob_offsets("riding", _x = x2off, _y = y2off)
 							break dir_loop
-	var/list/static/default_vehicle_pixel_offsets = list(TEXT_NORTH = list(0, 0), TEXT_SOUTH = list(0, 0), TEXT_EAST = list(0, 0), TEXT_WEST = list(0, 0))
+//	var/list/static/default_vehicle_pixel_offsets = list(TEXT_NORTH = list(0, 0), TEXT_SOUTH = list(0, 0), TEXT_EAST = list(0, 0), TEXT_WEST = list(0, 0)) //OV REMOVE
 /*	var/px = default_vehicle_pixel_offsets[AM_dir]
 	var/py = default_vehicle_pixel_offsets[AM_dir]
 	if(directional_vehicle_offsets[AM_dir])
@@ -276,6 +288,42 @@
 	user.Paralyze(60)
 	user.visible_message(span_warning("[AM] pushes [user] off of [AM.p_them()]!"), \
 						span_warning("[AM] pushes me off of [AM.p_them()]!"))
+
+//OV edit
+/datum/component/riding/human/handle_vehicle_offsets()
+	var/atom/movable/AM = parent
+	var/AM_dir = "[AM.dir]"
+	var/passindex = 0
+	var/has_fixedeye = FALSE
+	if(AM.has_buckled_mobs())
+		for(var/m in AM.buckled_mobs)
+			if(ishuman(m))
+				var/mob/living/carbon/human/H = m
+				if(H.fixedeye)
+					has_fixedeye = TRUE
+			passindex++
+			var/mob/living/buckled_mob = m
+			var/list/offsets = get_offsets(passindex)
+			var/rider_dir = get_rider_dir(passindex)
+			var/our_scale = buckled_mob.size_multiplier()
+			var/y_scale_math = ((-16*our_scale)+16)
+			if(!has_fixedeye)
+				buckled_mob.setDir(rider_dir)
+				dir_loop:
+					for(var/offsetdir in offsets)
+						if(offsetdir == AM_dir)
+							var/list/diroffsets = offsets[offsetdir]
+							var/x2off
+							var/y2off
+							x2off = diroffsets[1]
+							if(diroffsets.len >= 2)
+								y2off = diroffsets[2]
+							if(diroffsets.len == 3)
+								buckled_mob.layer = diroffsets[3]
+							y2off += y_scale_math
+							buckled_mob.set_mob_offsets("riding", _x = x2off, _y = y2off)
+							break dir_loop
+//OV edit end
 
 /datum/component/riding/cyborg
 	del_on_unbuckle_all = TRUE

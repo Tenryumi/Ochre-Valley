@@ -45,6 +45,8 @@ GLOBAL_LIST_INIT(virtue_mount_choices_anthrax, (list(
 
 /datum/component/precious_creature/proc/precious_died()
 	var/mob/living/our_owner = owner.resolve()
+	if(!our_owner || QDELETED(our_owner))
+		return
 	to_chat(our_owner, span_boldwarning("A quavering pang of loneliness streaks through your chest like cold lightning, sinking to the pit of your stomach. THEY ARE GONE!"))
 	our_owner.add_stress(/datum/stressevent/precious_mob_died)
 
@@ -100,7 +102,12 @@ GLOBAL_LIST_INIT(virtue_mount_choices_anthrax, (list(
 		has_name = "No"
 
 	//spawn in our creature and set it up
-	var/mob/living/simple_animal/the_real_honse = new our_chosen_honse(user.loc)
+	var/mob/living/simple_animal/the_real_honse
+	if(ispath(our_chosen_honse, /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast))
+		var/fogbeast_color_choice = input("What color is your trusty steed?") as null|anything in GLOB.valid_fogbeast_colors
+		the_real_honse = new our_chosen_honse(user.loc, fogbeast_color_choice)
+	else
+		the_real_honse = new our_chosen_honse(user.loc)
 	the_real_honse.AddComponent(/datum/component/precious_creature, user)
 	user.saddleborn_mount = WEAKREF(the_real_honse)
 
@@ -109,6 +116,27 @@ GLOBAL_LIST_INIT(virtue_mount_choices_anthrax, (list(
 		if (honse_name)
 			the_real_honse.name = honse_name
 			the_real_honse.real_name = honse_name
+
+	if(istype(the_real_honse, /mob/living/simple_animal/hostile/retaliate/rogue/saiga))
+		var/saiga_barding = list("None","Padded Barding","Chainmail Barding")
+		var/saiga_barding_choice = input(user, "What protection have you acquired for your steed?", "Saddleborn") as anything in saiga_barding
+		switch(saiga_barding_choice)
+			if("Padded Barding")
+				the_real_honse.bbarding = new /obj/item/clothing/barding()
+				the_real_honse.update_icon()
+			if("Chainmail Barding")
+				the_real_honse.bbarding = new /obj/item/clothing/barding/chain()
+				the_real_honse.update_icon()
+	else if(istype(the_real_honse, /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast))
+		var/fogbeast_barding = list("None","Padded Barding","Chainmail Barding")
+		var/fogbeast_barding_choice = input(user, "What protection have you acquired for your steed?", "Saddleborn") as anything in fogbeast_barding
+		switch(fogbeast_barding_choice)
+			if("Padded Barding")
+				the_real_honse.bbarding = new /obj/item/clothing/barding/fogbeast()
+				the_real_honse.update_icon()
+			if("Chainmail Barding")
+				the_real_honse.bbarding = new /obj/item/clothing/barding/fogbeast/chain()
+				the_real_honse.update_icon()
 
 	user.visible_message(span_info("[user] whistles sharply, and [the_real_honse] pads up from afar to their side."), span_notice("With a trusty whistle, my treasured steed returns to my side."))
 	playsound(user, 'sound/magic/saddleborn-call.ogg', 150, FALSE, 5)
@@ -192,7 +220,7 @@ GLOBAL_LIST_INIT(virtue_mount_choices_anthrax, (list(
 	user.visible_message(span_info("[user] starts fussing with [honse], preparing to send them away..."), span_notice("I start preparing to send [honse] away to roam freely and safely for a time..."))
 	honse.Immobilize(11 SECONDS)
 	honse.unbuckle_all_mobs(TRUE)
-	if (do_mob(user, honse, 10 SECONDS, double_progress = TRUE) && check_mount(user))
+	if (do_mob(user, honse, 7 SECONDS, double_progress = TRUE) && check_mount(user))
 		honse.unbuckle_all_mobs(TRUE)
 		if (!honse.has_buckled_mobs()) // just really super make sure we can't nullspace riders with this
 			honse.moveToNullspace() // BANISHED TO THE NULL DIMENSION!! hopefully this doesn't cause problems
@@ -226,7 +254,7 @@ GLOBAL_LIST_INIT(virtue_mount_choices_anthrax, (list(
 
 	var/mob/living/simple_animal/honse = user.saddleborn_mount.resolve()
 	var/back_from_the_void = (honse.loc == null)
-	var/callback_time = back_from_the_void ? 20 SECONDS : 10 SECONDS // nullspace returns take a lot longer to incentivize leaving it in the world
+	var/callback_time = back_from_the_void ? 10 SECONDS : 5 SECONDS // nullspace returns take a lot longer to incentivize leaving it in the world
 	var/dangerous_summon = FALSE // will we try to proc an ambush upon return?
 
 	if (get_dist(honse.loc, user.loc) <= world.view)

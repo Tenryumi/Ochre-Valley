@@ -29,7 +29,15 @@
 	var/runechat_msg = null
 	// If this is true, we skip setting the base runechat message and instead use whatever our at-emote-runtime message is. Useful for things like kiss/lick which change message based on conditions.
 	var/use_params_for_runechat = FALSE
+
+	/// Whether this emote is filtered by our "hear animal noises" preference.
 	var/is_animal = FALSE
+
+	/// For ranged targeted emotes, range of 2 is for adjacents
+	var/targetrange = 2 
+
+	/// Whether this emote will ONLY go through a few walls on the same z-level.
+	var/is_quiet = FALSE
 
 /datum/emote/New()
 	if(!runechat_msg && !use_params_for_runechat)
@@ -63,13 +71,16 @@
 	if(targetted)
 		var/list/mobsadjacent = list()
 		var/mob/chosenmob
-		for(var/mob/living/M in range(user, 2))
+		for(var/mob/living/M in range(user, targetrange))
 			if(M != user)
 				mobsadjacent += M
 		if(mobsadjacent.len)
-			chosenmob = tgui_input_list(user, "[key] who?", "XYLIX", mobsadjacent)
+			chosenmob = input("[key] who?") in mobsadjacent
 		if(chosenmob)
 			if(user.Adjacent(chosenmob))
+				params = chosenmob.name
+				adjacentaction(user, chosenmob)
+			else if(targetrange > 2) //if it's a ranged targeted emote
 				params = chosenmob.name
 				adjacentaction(user, chosenmob)
 	var/raw_msg = select_message_type(user, intentional)
@@ -116,7 +127,7 @@
 			else// if(!vision.viewing_head)
 				emotelocation = user
 
-		playsound(emotelocation, tmp_sound, snd_vol, FALSE, snd_range, soundping = soundping, animal_pref = animal)
+		playsound(emotelocation, tmp_sound, snd_vol, FALSE, snd_range, soundping = soundping, animal_pref = animal, quiet = is_quiet)
 	if(!nomsg)
 		user.log_message(msg, LOG_EMOTE)
 		var/pre_color_msg = msg

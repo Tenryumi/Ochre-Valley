@@ -13,7 +13,7 @@
 	max_integrity = 20
 	anvilrepair = /datum/skill/craft/blacksmithing
 	tool_behaviour = TOOL_SUTURE
-	experimental_inhand = FALSE
+	experimental_inhand = TRUE
 	/// Amount of uses left
 	var/stringamt = 20
 	var/maxstring = 20
@@ -264,6 +264,13 @@
 	name = "needle of pestra"
 	desc = span_green("This needle has been blessed by the goddess of medicine herself!")
 	infinite = TRUE
+
+/obj/item/needle/bronze
+	name = "bronze needle"
+	icon_state = "bronzeneedle"
+	desc = "A deceptively long needle with a craned tip, laced for labors-a-plenety."
+	stringamt = 30
+	maxstring = 30
 
 /obj/item/needle/aalloy
 	name = "decrepit needle"
