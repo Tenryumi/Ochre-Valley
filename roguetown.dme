@@ -3211,6 +3211,7 @@
 #include "modular_ochrevalley\code\ooc_escape.dm"
 #include "modular_ochrevalley\code\vore_verb.dm"
 #include "modular_ochrevalley\code\datums\loadout\loadout_accessories.dm"
+#include "modular_ochrevalley\code\datums\loadout\loadout_hats.dm"
 #include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\antennas.dm"
 #include "modular_ochrevalley\code\modules\mob\dead\new_player\sprite_accessory\wings.dm"
 #include "modular_ochrevalley\code\modules\mob\living\carbon\human\hand_games.dm"
