@@ -111,7 +111,7 @@
 		if("Arrows with a glass ampule full of water")
 			beltl = /obj/item/quiver/Warrows
 		else // Fallback just in case something breaks from anyone meddling with it later.
-			beltl = /obj/item/quiver/arrows
+			beltl = /obj/item/quiver/Warrows
 	// OV Edit end
 	armor = /obj/item/clothing/suit/roguetown/armor/leather
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
