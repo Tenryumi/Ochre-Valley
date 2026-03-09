@@ -90,7 +90,7 @@ export const CharacterDirectoryList = (props: {
             onSortId={setSortId}
             onSortOrder={setSortOrder}
           >
-            Event Pref
+            Examine
           </SortButton>
           <Table.Cell collapsing textAlign="right">
             View
@@ -145,6 +145,7 @@ export const CharacterDirectoryList = (props: {
                 <Button
                   onClick={() => onOverlay(character)}
                   color="transparent"
+                  textColor="black"
                   icon="sticky-note"
                   mr={1}
                 >

@@ -83,9 +83,11 @@ GLOBAL_LIST_EMPTY(chardirectory_photos)
 		var/ooc_notes_maybes = null
 		var/ooc_notes_dislikes = null
 		var/ooc_notes_style = null
+		var/nsfw_ooc_notes = null
 		var/gendertag = null
 		var/sexualitytag = null
 		var/flavor_text = null
+		var/nsfw_flavor_text = null
 		var/custom_link = null
 		var/tag
 		var/erptag
@@ -117,6 +119,9 @@ GLOBAL_LIST_EMPTY(chardirectory_photos)
 			species = H.dna.species.name
 			ooc_notes = H.ooc_notes
 			flavor_text = H.flavortext
+			nsfw_ooc_notes = H.erpprefs
+			nsfw_flavor_text = H.nsfwflavortext
+			//photo = get_headshot_icon(H) //Does not work properly, sadly!
 
 /*
 		if(isanimal(C.mob))
@@ -156,6 +161,7 @@ GLOBAL_LIST_EMPTY(chardirectory_photos)
 			"ooc_notes_maybes" = ooc_notes_maybes,
 			"ooc_notes_dislikes" = ooc_notes_dislikes,
 			"ooc_notes_style" = ooc_notes_style,
+			"nsfw_ooc_notes" = nsfw_ooc_notes,
 			"gendertag" = gendertag,
 			"sexualitytag" = sexualitytag,
 			"ooc_notes" = ooc_notes,
@@ -163,6 +169,7 @@ GLOBAL_LIST_EMPTY(chardirectory_photos)
 			"erptag" = erptag,
 			"character_ad" = character_ad,
 			"flavor_text" = flavor_text,
+			"nsfw_flavor_text" = nsfw_flavor_text,
 			"custom_link" = custom_link,
 			"photo" = photo,
 		)))

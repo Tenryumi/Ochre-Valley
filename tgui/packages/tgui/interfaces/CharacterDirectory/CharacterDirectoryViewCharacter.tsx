@@ -104,9 +104,19 @@ export const ViewCharacter = (props: {
           )}
         </Box>
       </Section>
+      <Section title="NSFW OOC Notes">
+        <Box style={{ wordBreak: 'break-all' }} preserveWhitespace>
+          <Table.Cell>{overlay.nsfw_ooc_notes}</Table.Cell>
+        </Box>
+      </Section>
       <Section title="Flavor Text">
         <Box style={{ wordBreak: 'break-all' }} preserveWhitespace>
           <Table.Cell>{overlay.flavor_text}</Table.Cell>
+        </Box>
+      </Section>
+      <Section title="NSFW Flavor Text">
+        <Box style={{ wordBreak: 'break-all' }} preserveWhitespace>
+          <Table.Cell>{overlay.nsfw_flavor_text}</Table.Cell>
         </Box>
       </Section>
       <Section title="Custom Link">
