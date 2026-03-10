@@ -70,7 +70,7 @@
 	"Militia War Axe",
 	"Militia Thresher",
 	"Militia Goedendag (Pair)",
-	"Greatsword (Iron)") // Any that scales off labor skill isn't included
+	"Greatsword (Iron)") //OV ADD - Any that scales off labor skill isn't included
 	var/weapon_choice = input(H, "Choose your weapon.", "ARMS TO SLAY THE OPPRESSORS") as anything in weapons
 	switch(weapon_choice)
 		if("Warhammer")
